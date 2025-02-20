@@ -1,0 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_four.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slimane <slimane@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/18 03:35:08 by slimane           #+#    #+#             */
+/*   Updated: 2025/01/31 02:15:46 by slimane          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "sort.h"
+
+void	sort_four(t_stack **stack_a, t_stack **stack_b)
+{
+	t_stack	*tmp;
+	int		position;
+
+	tmp = *stack_a;
+	position = 0;
+	if (tmp->index == 0 && tmp->next->index == 1 && tmp->next->next->index == 2
+		&& tmp->next->next->next->index == 3)
+		return ;
+	while (tmp && tmp->index != 0)
+	{
+		position++;
+		tmp = tmp->next;
+	}
+	while ((*stack_a)->index != 0)
+	{
+		if (position <= 2)
+			rotate(stack_a, RA);
+		else
+			reverse(stack_a, RRA);
+	}
+	push(stack_a, stack_b, PB);
+	ft_index(stack_a);
+	sort_three(stack_a);
+	push(stack_a, stack_b, PA);
+	ft_index(stack_a);
+}
